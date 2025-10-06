@@ -1,7 +1,17 @@
 import * as api from './api.js';
 
-const host = 'http://localhost:3030'
-api.settings.host = 'http://localhost:3030';
+// Detect environment and set appropriate backend URL
+function getBackendUrl() {
+  // Check if we're on localhost (development/testing)
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return 'http://localhost:3030';
+  }
+  // Production - replace with your actual Render backend URL
+  return 'https://zero3-library-backend-hsy7.onrender.com';
+}
+
+const host = getBackendUrl();
+api.settings.host = host;
 
 export const login = api.login;
 export const register = api.register;
