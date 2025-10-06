@@ -8,21 +8,26 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
         
     steps:
-    - name: Repo checkout
-      uses: actions/checkout@v4
-    - name: Use Node.js 20
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-    - name: Install node modules
-      run: npm install
-    - name: Start frondend server
-      run: npm start
-    - name: Start backend server
-      run: npm server
-    - name: Execute integration tests
-      run: npm test
+      - name: Repo checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install node modules
+        run: npm ci
+
+      - name: Start backend and frontend in background
+        run: |
+          nohup npm run server > server.log 2>&1 &
+          nohup npx http-server -p 3000 -c-1 > frontend.log 2>&1 &
+          sleep 5
+
+      - name: Execute integration tests
+        run: npm test
+
