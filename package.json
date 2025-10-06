@@ -4,10 +4,9 @@
     "description": "Online Book Library Single Page Application",
     "main": "index.html",
     "scripts": {
-       "frontend": "http-server -p 3000 -c-1",
-       "backend": "cd server && node server.js",
-       "start": "npm-run-all --parallel backend frontend",
-       "test": "playwright test"
+        "start": "http-server -a localhost -p 3000 -P http://localhost:3000? -c-1",
+        "server": "cd server && node server.js",
+        "test": "playwright test"
     },
     "author": "",
     "license": "ISC",
