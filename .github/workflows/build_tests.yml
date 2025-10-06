@@ -16,7 +16,10 @@ jobs:
           npm start &
           # `npm-run-all` runs backend + frontend in parallel
           sleep 5
-
+      
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+        
       - name: Run tests
         run: npm test
 
