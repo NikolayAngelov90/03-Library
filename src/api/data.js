@@ -1,7 +1,10 @@
 import * as api from './api.js';
 
-const host = 'http://localhost:3030'
-api.settings.host = 'http://localhost:3030';
+const host = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3030' 
+  : 'https://zero3-library-backend-hsy7.onrender.com';
+
+api.settings.host = host;
 
 export const login = api.login;
 export const register = api.register;
